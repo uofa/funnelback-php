@@ -1,6 +1,7 @@
 {
   "name": "previousnext/funnelback-php",
   "description": "A PHP client for Funnelback search.",
+  "license": "GPL-2.0+",
   "autoload": {
     "psr-4": { "": "src/" }
   },
