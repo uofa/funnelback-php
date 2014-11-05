@@ -70,7 +70,7 @@ class Result {
   public function __construct($result_data) {
     $this->cacheUrl = $result_data['cacheUrl'];
     $this->clickUrl = $result_data['clickTrackingUrl'];
-    $date = new \DateTime();
+    $date = new \DateTime('now', new \DateTimeZone("UTC"));
     // Remove milliseconds.
     $date->setTimestamp($result_data['date'] / 1000);
     $this->date = $date;
