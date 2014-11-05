@@ -8,12 +8,12 @@
 namespace Funnelback;
 
 use GuzzleHttp\Client as HttpClient;
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\ClientInterface as HttpClientInterface;
 
 /**
  * Funnelback client.
  */
-class Client implements FunnelbackClientInterface {
+class Client implements ClientInterface {
 
   /**
    * The http client.
@@ -61,10 +61,11 @@ class Client implements FunnelbackClientInterface {
    * @param \GuzzleHttp\ClientInterface|null $client
    *   (optional) The http client.
    */
-  public function __construct(array $config, ClientInterface $client = NULL) {
+  public function __construct(array $config, HttpClientInterface $client = NULL) {
     $this->baseUrl = $config['base_url'];
     $this->subPath = isset($config['sub_path']) ? $config['sub_path'] : '';
-    $this->format = isset($config['format']) ? strtolower($config['format']) : $this::JSON_FORMAT;
+    $format = isset($config['format']) ? $config['format'] : self::JSON_FORMAT;
+    $this->setFormat($format);
     $this->collection = $config['collection'];
     $this->client = $client;
   }
@@ -109,15 +110,26 @@ class Client implements FunnelbackClientInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Set the format to use.
+   *
+   * @param string $format
+   *   The format.
    */
-  public function getFormat() {
-    if (!$this->isValidFormat($this->format)) {
+  protected function setFormat($format) {
+    $format = trim(strtolower($format));
+    if (!$this->isValidFormat($format)) {
       throw new \InvalidArgumentException(sprintf('Invalid format: %s. Allowed formats are %s',
-        $this->format,
+        $format,
         implode(',', $this->allowedFormats())
       ));
     }
+    $this->format = $format;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormat() {
     return $this->format;
   }
 
@@ -137,7 +149,9 @@ class Client implements FunnelbackClientInterface {
    */
   public function search($query, $params = []) {
     $params = array_merge(['query' => $query], $params);
-    return $this->getClient()->get(NULL, ['query' => $params]);
+    $http_response = $this->getClient()->get(NULL, ['query' => $params]);
+
+    return new Response($http_response);
   }
 
   /**

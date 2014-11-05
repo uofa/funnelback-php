@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Funnelback\FunnelbackClientInterface
+ * Contains \Funnelback\ClientInterface
  */
 
 namespace Funnelback;
@@ -10,7 +10,7 @@ namespace Funnelback;
 /**
  * Provides an interface for the Funnelback client.
  */
-interface FunnelbackClientInterface {
+interface ClientInterface {
 
   const XML_FORMAT = "xml";
 
@@ -74,8 +74,8 @@ interface FunnelbackClientInterface {
    * @param array $params
    *   (optional) The search parameters.
    *
-   * @return mixed
-   *   The search results.
+   * @return \Funnelback\Response
+   *   The search response.
    */
   public function search($query, $params = []);
 

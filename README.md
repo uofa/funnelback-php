@@ -2,6 +2,12 @@
 
 This library provides a PHP client to the Funnelback Seach API.
 
+The goal of this library is to provide a clean and simple interface to Funnelback
+search.
+
+The key properties are available behind model objects and their methods.
+
+
 ## Installation
 
 This project can be installed using Composer. Add the following to your composer.json:
@@ -22,9 +28,27 @@ $client = new \Funnelback\Client([
   'base_url' => 'http://example.funnelback.com.au/'
 ]);
 
-$results = $client->search('my search query');
+$response = $client->search('my search query');
+
+// Get summary info.
+$summary = $response->getResultsSummary();
+$summary->getQuery(); // The query used.
+$summary->getTotal(); // Total search results
+
+// Loop through the results.
+foreach($response->getResults() as $result) {
+  $result->getTitle();
+  $result->getSummary();
+  $result->getDate()->format('Y-m-d');
+  $result->getLiveUrl();
+  $result->getClickUrl();
+  $result->getCacheUrl();
+}
+
+
 ```
 
 ## To Do
 
-Create a result object for easier handling of results.
+Support other formats. Only JSON supported currently.
+
