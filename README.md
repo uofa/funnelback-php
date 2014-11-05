@@ -3,10 +3,8 @@
 This library provides a PHP client to the Funnelback Seach API.
 
 The goal of this library is to provide a clean and simple interface to Funnelback
-search.
-
-The key properties are available behind model objects and their methods.
-
+search, exposing the most commonly used fields as PHP classes and methods, while
+still providing access to the raw results data.
 
 ## Installation
 
@@ -45,10 +43,19 @@ foreach($response->getResults() as $result) {
   $result->getCacheUrl();
 }
 
+// Loop through the facets.
+foreach ($response->getFacets() as $facet) {
+  $facet->getName();
+  // Loop through the facet items.
+  foreach ($facet->getFacetItems() as $facet_item) {
+    $facet_item->getLabel();
+    $facet_item->getCount();
+    $facet_item->getQueryStringParam();
+  }
+}
 
 ```
 
 ## To Do
 
-Support other formats. Only JSON supported currently.
-
+Support other formats? (Only JSON is supported currently)

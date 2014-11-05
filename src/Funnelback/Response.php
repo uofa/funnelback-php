@@ -92,6 +92,7 @@ class Response {
     $result_packet = $response['resultPacket'];
     $this->resultsSummary = new ResultSummary($result_packet['resultsSummary']);
     $this->results = $this->buildResults($result_packet['results']);
+    $this->facets = $this->buildFacets($response['facets']);
   }
 
   /**
@@ -144,7 +145,6 @@ class Response {
     return $this->bestBets;
   }
 
-
   /**
    * Gets the query.
    *
@@ -171,7 +171,7 @@ class Response {
    * @param array $results_data
    *   The results data.
    *
-   * @return array
+   * @return \Funnelback\Result[]
    *   The results.
    */
   protected function buildResults($results_data) {
@@ -181,4 +181,22 @@ class Response {
     }
     return $results;
   }
+
+  /**
+   * Builds a list of facets grouped by category.
+   *
+   * @param array $facets_data
+   *   The raw facet data.
+   *
+   * @return array
+   *   A list of facets grouped by category.
+   */
+  protected function buildFacets($facets_data) {
+    $facets = [];
+    foreach ($facets_data as $facet_data) {
+      $facets[] = new Facet($facet_data);
+    }
+    return $facets;
+  }
+
 }
