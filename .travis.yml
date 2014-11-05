@@ -8,6 +8,7 @@ php:
 
 before_script:
 - composer install --no-interaction --prefer-dist
+- echo 'date.timezone = "Australia/Sydney"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 script: vendor/bin/phpunit --colors  --coverage-text
 
