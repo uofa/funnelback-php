@@ -64,7 +64,7 @@ class Client implements ClientInterface
      */
     public function __construct(array $config, HttpClientInterface $client = null)
     {
-        $this->baseUrl = $config['base_url'];
+        $this->baseUrl = $config['base_uri'];
         $this->subPath = isset($config['sub_path']) ? $config['sub_path'] : '';
         $format = isset($config['format']) ? $config['format'] : self::JSON_FORMAT;
         $this->setFormat($format);
@@ -77,15 +77,11 @@ class Client implements ClientInterface
      */
     public function getClient()
     {
+        $baseUri = sprintf('%s/s/search.%s', $this->getBaseUrl(), $this->getFormat());
+        $defaults = ['collection' => $this->getCollection()];
         if (!isset($this->client)) {
             $this->client = new HttpClient([
-                'base_url' => [
-                    '{base_url}/s/search.{format}',
-                    ['base_url' => $this->getBaseUrl(), 'format' => $this->getFormat()]
-                ],
-                'defaults' => [
-                    'query' => ['collection' => $this->getCollection()],
-                ]
+                'base_uri' => $baseUri,
             ]);
         }
 
@@ -160,7 +156,12 @@ class Client implements ClientInterface
      */
     public function search($query, $params = [])
     {
-        $params = array_merge(['query' => $query], $params);
+
+        $params = array_merge(
+            ['collection' => $this->getCollection()],
+            ['query' => $query],
+            $params
+        );
         $http_response = $this->getClient()->get(null, ['query' => $params]);
 
         return new Response($http_response);

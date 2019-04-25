@@ -34,7 +34,7 @@ class ClientTest extends TestCase
         $http_client = new HttpClient(['handler' => $handlerStack]);
 
         $config = [
-          'base_url' => 'http://agencysearch.australia.gov.au',
+          'base_uri' => 'http://agencysearch.australia.gov.au',
           'collection' => 'agencies',
         ];
 
