@@ -1,5 +1,3 @@
-# Funnelback PHP [![Build Status](https://travis-ci.org/previousnext/funnelback-php.svg)](https://travis-ci.org/previousnext/funnelback-php)
-
 This library provides a PHP client to the Funnelback Seach API.
 
 The goal of this library is to provide a clean and simple interface to Funnelback
@@ -12,8 +10,14 @@ This project can be installed using Composer. Add the following to your composer
 
 ```
 {
+  "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/uofa/funnelback-php"
+        }
+    ],
     "require": {
-        "previousnext/funnelback-php": "0.0.*"
+        "uofa/funnelback-php": "dev-master"
     }
 }
 ```
@@ -56,6 +60,8 @@ foreach ($response->getFacets() as $facet) {
 
 ```
 
-## To Do
+## Updates
 
-Support other formats? (Only JSON is supported currently)
+Changes that were implemented on top of the original version <https://github.com/uofa/funnelback-php>
+- bumped dependencies for Guzzle and PHPUnit
+- PSR-2 code style tweaks
