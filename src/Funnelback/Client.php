@@ -9,6 +9,7 @@ namespace Funnelback;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\ClientInterface as HttpClientInterface;
+use GuzzleHttp\Psr7;
 
 /**
  * Funnelback client.
@@ -156,13 +157,12 @@ class Client implements ClientInterface
      */
     public function search($query, $params = [])
     {
-
         $params = array_merge(
             ['collection' => $this->getCollection()],
             ['query' => $query],
             $params
         );
-        $http_response = $this->getClient()->get(null, ['query' => $params]);
+        $http_response = $this->getClient()->get(null, ['query' => Psr7\build_query($params)]);
 
         return new Response($http_response);
     }
