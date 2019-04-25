@@ -1,5 +1,5 @@
 {
-  "name": "previousnext/funnelback-php",
+  "name": "uofa/funnelback-php",
   "description": "A PHP client for Funnelback search.",
   "license": "GPL-2.0+",
   "autoload": {
@@ -7,7 +7,8 @@
   },
   "require": {
     "php": ">=5.4",
-    "guzzlehttp/psr7": "~1.5"
+    "guzzlehttp/psr7": "~1.5",
+    "guzzlehttp/guzzle": "~6.3"
   },
   "require-dev": {
     "phpunit/phpunit": "~8.1"
@@ -22,5 +23,5 @@
       "email": "zeno.zaplaic@abdn.ac.uk"
     }
   ],
-  "minimum-stability": "dev"
+  "minimum-stability": "stable"
 }
