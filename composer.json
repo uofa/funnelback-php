@@ -7,15 +7,19 @@
   },
   "require": {
     "php": ">=5.4",
-    "guzzlehttp/guzzle": "~5.0"
+    "guzzlehttp/psr7": "~1.5"
   },
   "require-dev": {
-    "phpunit/phpunit": "~4.0"
+    "phpunit/phpunit": "~8.1"
   },
   "authors": [
     {
       "name": "Kim Pepper",
       "email": "kim@pepper.id.au"
+    },
+    {
+      "name": "Zeno Zaplaic",
+      "email": "zeno.zaplaic@abdn.ac.uk"
     }
   ],
   "minimum-stability": "dev"

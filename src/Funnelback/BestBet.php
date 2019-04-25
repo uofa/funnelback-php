@@ -10,6 +10,6 @@ namespace Funnelback;
 /**
  * @todo add class comment.
  */
-class BestBet {
-
+class BestBet
+{
 }
