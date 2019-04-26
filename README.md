@@ -27,7 +27,7 @@ This project can be installed using Composer. Add the following to your composer
 ```php
 $client = new \Funnelback\Client([
   'collection' => 'my_collection',
-  'base_url' => 'http://example.funnelback.com.au/'
+  'base_uri' => 'example.funnelback.com'
 ]);
 
 $response = $client->search('my search query');
@@ -65,3 +65,6 @@ foreach ($response->getFacets() as $facet) {
 Changes that were implemented on top of the original version <https://github.com/uofa/funnelback-php>
 - bumped dependencies for Guzzle and PHPUnit
 - PSR-2 code style tweaks
+- Updated base_url config key to base_uri
+- Take into account if a facet does not return any categories
+- Allow multiple identical keys in the query string (required for multi-select facets)
