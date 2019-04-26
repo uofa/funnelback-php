@@ -96,6 +96,7 @@ class Response
         $this->resultsSummary = new ResultSummary($result_packet['resultsSummary']);
         $this->results = $this->buildResults($result_packet['results']);
         $this->facets = $this->buildFacets($response['facets']);
+        $this->spelling = $result_packet['spell'];
     }
 
     /**
@@ -173,6 +174,16 @@ class Response
     public function getTotalTimeMillis()
     {
         return $this->totalTimeMillis;
+    }
+
+    /**
+     * Gets the spelling info
+     *
+     * @return array
+     */
+    public function getSpelling()
+    {
+        return $this->spelling;
     }
 
     /**

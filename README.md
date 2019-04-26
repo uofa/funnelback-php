@@ -68,3 +68,4 @@ Changes that were implemented on top of the original version <https://github.com
 - Updated base_url config key to base_uri
 - Take into account if a facet does not return any categories
 - Allow multiple identical keys in the query string (required for multi-select facets)
+- Return spelling data using `$response->getSpelling()`;
