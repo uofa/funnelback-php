@@ -44,7 +44,7 @@ class Facet
     {
         $this->facetData = $facet_data;
         $this->name = $facet_data['name'];
-        $this->facetItems = (!empty($facet_data['categories'])) ? $this->buildFacetItems($facet_data['categories'][0]['values']) : [];
+        $this->facetItems = (!empty($facet_data['allValues'])) ? $this->buildFacetItems($facet_data['allValues']) : [];
     }
 
     /**
