@@ -252,7 +252,8 @@ class Response
      * @return array
      *   A list of facet metadata
      */
-    protected function buildFacetDefinitions($facets_data) {
+    protected function buildFacetDefinitions($facets_data)
+    {
         $facets = [];
         foreach ($facets_data as $facet_data) {
             $facets[$facet_data['name']] = $facet_data;
