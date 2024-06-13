@@ -43,6 +43,13 @@ class Response
      */
     protected $facets;
 
+     /**
+     * The facets definitions.
+     *
+     * @var array
+     */
+    protected $facetDefinitions;
+
     /**
      * The result summary.
      *
@@ -97,6 +104,10 @@ class Response
         $this->results = $this->buildResults($result_packet['results']);
         $this->facets = $this->buildFacets($response['facets']);
         $this->spelling = $result_packet['spell'];
+
+        $profiles = $this->responseJson['question']['collection']['profiles'];
+        $profileName = array_keys($profiles)[0];
+        $this->facetDefinitions = $this->buildFacetDefinitions($profiles[$profileName]['facetedNavConfConfig']['facetDefinitions']);
     }
 
     /**
@@ -141,6 +152,16 @@ class Response
     public function getFacets()
     {
         return $this->facets;
+    }
+
+    /**
+     * Get the facet definitions
+     *
+     * @return array
+     */
+    public function getFacetDefinitions()
+    {
+        return $this->facetDefinitions;
     }
 
     /**
@@ -218,6 +239,24 @@ class Response
         $facets = [];
         foreach ($facets_data as $facet_data) {
             $facets[] = new Facet($facet_data);
+        }
+        return $facets;
+    }
+
+    /**
+     * Builds a list of facet metadata.
+     *
+     * @param array $facets_data
+     *   The raw facet data.
+     *
+     * @return array
+     *   A list of facet metadata
+     */
+    protected function buildFacetDefinitions($facets_data)
+    {
+        $facets = [];
+        foreach ($facets_data as $facet_data) {
+            $facets[$facet_data['name']] = $facet_data;
         }
         return $facets;
     }

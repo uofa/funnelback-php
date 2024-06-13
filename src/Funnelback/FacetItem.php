@@ -52,7 +52,7 @@ class FacetItem
         $this->facetItemData = $facet_item_data;
         $this->label = $facet_item_data['label'];
         $this->count = $facet_item_data['count'];
-        $this->queryStringParam = $facet_item_data['queryStringParam'];
+        $this->queryStringParam = null;
     }
 
     /**
